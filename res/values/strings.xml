@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SXZQ</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+	 <string name="action_menu_groupchat">发起群聊</string>
+    <string name="action_menu_addfriend">添加好友</string>
+    <string name="action_menu_qr">扫一扫</string>
+    <string name="action_menu_advice">意见建议</string>
+    
+    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中&#8230;</string>
+    <string name="pull_to_refresh_tap_label">点击可以刷新</string>
+ 	<string name="pull_to_refresh_from_bottom_pull_label">上拉可以刷新</string>
+    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+  
+    
+</resources>

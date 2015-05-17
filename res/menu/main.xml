@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sxzq.oa.activity.MainActivity" >
+
+   <!--  <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/action_search"
+        android:showAsAction="always|collapseActionView"
+        android:title="Search"
+        /> -->
+    
+    <item
+        android:id="@+id/action_plus"
+        android:actionProviderClass="com.sxzq.oa.fragment.PlusActionProvider"
+        android:icon="@drawable/action_more"
+        android:showAsAction="always"
+        android:title="@null"
+        />
+	
+</menu>
