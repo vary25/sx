@@ -62,11 +62,11 @@ import com.sxzq.oa.util.PreferenceConstants;
 import com.sxzq.oa.util.PreferenceUtils;
 import com.sxzq.oa.util.T;
 import com.sxzq.oa.util.XMPPHelper;
+import com.sxzq.oq.ui.xlistview.MsgListView;
+import com.sxzq.oq.ui.xlistview.MsgListView.IXListViewListener;
 import com.way.ui.emoji.EmojiKeyboard;
 import com.way.ui.emoji.EmojiKeyboard.EventListener;
 import com.way.ui.pagerindicator.CirclePageIndicator;
-import com.way.ui.xlistview.MsgListView;
-import com.way.ui.xlistview.MsgListView.IXListViewListener;
 
 public class ChatActivity extends BaseActivity implements OnTouchListener,
 		OnClickListener, IXListViewListener, IConnectionStatusCallback {

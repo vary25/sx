@@ -119,7 +119,7 @@ public class WelcomActivity extends BaseActivity {
 		// while interacting with the UI.
 		findViewById(R.id.dummy_button).setOnTouchListener(
 				mDelayHideTouchListener);
-		String token = "token";
+		String token = "";
 		if (!TextUtils.isEmpty(token)) {
 			mHandler.postDelayed(gotoMainAct, 3000);
 		} else {

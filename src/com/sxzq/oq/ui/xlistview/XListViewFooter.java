@@ -4,7 +4,7 @@
  * @author Maxwin
  * @description XListView's footer
  */
-package com.way.ui.xlistview;
+package com.sxzq.oq.ui.xlistview;
 
 import android.content.Context;
 import android.util.AttributeSet;

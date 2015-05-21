@@ -1,5 +1,7 @@
 package com.sxzq.oa;
 
+import com.sxzq.oa.servcie.XXService;
+
 import framework.storage.dir.DirectoryContextExample;
 import framework.storage.dir.DirectoryManager;
 import framework.utils.CommonUtil;
@@ -45,4 +47,20 @@ public class Session {
 	public Context getContext() {
 		return mContext;
 	}
+	
+	private XXService service;
+
+
+	public XXService getService() {
+		return service;
+	}
+
+	public void setService(XXService service) {
+		this.service = service;
+	}
+	
+	public boolean isConnected() {
+		return service != null && service.isAuthenticated();
+	}
+	
 }

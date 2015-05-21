@@ -162,7 +162,7 @@ public class LoginActivity extends BaseFragmentActivity1 implements
 			mAccountEt.setText(account);
 		if (!TextUtils.isEmpty(password))
 			mPasswordEt.setText(password);
-		mAccountEt.addTextChangedListener(this);
+//		mAccountEt.addTextChangedListener(this);
 		mLoginDialog = DialogUtil.getLoginDialog(this);
 		mLoginOutTimeProcess = new ConnectionOutTimeProcess();
 		
