@@ -5,6 +5,15 @@
    android:layout_height="match_parent" 
    android:background="@color/main_tab_bg"
     xmlns:android="http://schemas.android.com/apk/res/android">
+     <include
+        layout="@layout/custom_commen_title"
+        android:focusable="true" />
+
+    <include
+        layout="@layout/net_status_bar_info_top"
+        android:visibility="gone" />
+    
+    
    <android.support.v4.view.ViewPager
       android:id="@+id/main_ViewPager"
       android:layout_width="match_parent"
