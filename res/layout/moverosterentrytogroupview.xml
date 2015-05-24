@@ -17,7 +17,7 @@
         android:focusable="true"
         android:text="@string/MoveRosterEntryToGroupDialog_summ" />
 
-    <com.way.ui.view.GroupNameView
+    <com.sxzq.oa.ui.view.GroupNameView
         android:id="@+id/moverosterentrytogroupview_gv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

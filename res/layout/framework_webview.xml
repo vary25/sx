@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/framework_webview_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/main_tab_bg" >
+
+    <include android:id="@+id/title_bar"  layout="@layout/custom_commen_title" />
+
+    <LinearLayout
+        android:id="@+id/view2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <ProgressBar
+            android:id="@+id/tt_view_probar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="10px"
+            android:max="100"
+            android:paddingLeft="3px"
+            android:paddingRight="5px"
+            android:paddingTop="3px"
+            android:progress="0"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/framework_webview_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/view2"
+        android:layout_below="@id/title_bar" >
+
+        <com.sxzq.oa.ui.view.TTWebView
+            android:id="@+id/tt_view_webview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fastScrollEnabled="true"
+            android:longClickable="true"
+            android:scrollbarStyle="insideOverlay" />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/view_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/framework_progressbar"
+        android:indeterminateOnly="true"
+        android:visibility="gone" />
+
+    <!-- </LinearLayout> -->
+
+    <com.zst.voc.utils.view.TTWebViewToolBar
+        android:id="@+id/tt_view_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="#00000000"
+        android:gravity="center|right"
+        android:orientation="horizontal" />
+
+</RelativeLayout>
