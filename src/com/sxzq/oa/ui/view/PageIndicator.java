@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.way.ui.view;
+package com.sxzq.oa.ui.view;
 
 import android.support.v4.view.ViewPager;
 

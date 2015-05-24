@@ -143,9 +143,9 @@ public class ChatActivity extends BaseActivity implements OnTouchListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.chat);
-		initData();// 初始化数据
-		initView();// 初始化view
+//		setContentView(R.layout.chat);
+//		initData();// 初始化数据
+//		initView();// 初始化view
 		//initFacePage();// 初始化表情
 		setChatWindowAdapter();// 初始化对话数据
 		getContentResolver().registerContentObserver(
@@ -232,7 +232,7 @@ public class ChatActivity extends BaseActivity implements OnTouchListener,
 			unbindXMPPService();
 	}
 
-	private void initData() {
+	protected void initData() {
 		mWithJabberID = getIntent().getDataString().toLowerCase();// 获取聊天对象的id
 		// 将表情map的key保存在数组中
 		Set<String> keySet = XXApp.getInstance().getFaceMap().keySet();
@@ -271,7 +271,8 @@ public class ChatActivity extends BaseActivity implements OnTouchListener,
 		// mMsgListView.setSelection(adapter.getCount() - 1);
 	}
 
-	private void initView() {
+	protected void initView() {
+		setContentView(R.layout.chat);
 		mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 		mWindowNanagerParams = getWindow().getAttributes();
 

@@ -33,6 +33,8 @@ import com.sxzq.oa.ui.iphonetreeview.IphoneTreeView;
 import com.sxzq.oa.ui.pulltorefresh.PullToRefreshBase;
 import com.sxzq.oa.ui.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import com.sxzq.oa.ui.pulltorefresh.PullToRefreshScrollView;
+import com.sxzq.oa.ui.view.AddRosterItemDialog;
+import com.sxzq.oa.ui.view.GroupNameView;
 import com.sxzq.oa.util.L;
 import com.sxzq.oa.util.PreferenceConstants;
 import com.sxzq.oa.util.PreferenceUtils;
@@ -40,8 +42,6 @@ import com.sxzq.oa.util.T;
 import com.way.ui.quickaction.ActionItem;
 import com.way.ui.quickaction.QuickAction;
 import com.way.ui.quickaction.QuickAction.OnActionItemClickListener;
-import com.way.ui.view.AddRosterItemDialog;
-import com.way.ui.view.GroupNameView;
 
 public class ContactsFragment extends Fragment
 {
