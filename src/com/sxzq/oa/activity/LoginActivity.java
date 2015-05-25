@@ -35,7 +35,7 @@ import com.sxzq.oa.util.XMPPHelper;
 
 public class LoginActivity extends BaseFragmentActivity1 implements
 		IConnectionStatusCallback, TextWatcher {
-	public static final String LOGIN_ACTION = "com.way.action.LOGIN";
+	public static final String LOGIN_ACTION = "com.sxzq.oa.action.LOGIN";
 	private static final int LOGIN_OUT_TIME = 0;
 	private Button mLoginBtn;
 	private EditText mAccountEt;
@@ -54,6 +54,7 @@ public class LoginActivity extends BaseFragmentActivity1 implements
 	private View mTipsViewRoot;
 	private TextView mTipsTextView;
 	private Animation mTipsAnimation;
+	ServiceConnection mServiceConnection;
 
 	private Handler mHandler = new Handler() {
 
@@ -76,22 +77,7 @@ public class LoginActivity extends BaseFragmentActivity1 implements
 		}
 
 	};
-	ServiceConnection mServiceConnection = new ServiceConnection() {
-
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mXxService = ((XXService.XXBinder) service).getService();
-			mXxService.registerConnectionStatusCallback(LoginActivity.this);
-			// 开始连接xmpp服务器
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			mXxService.unRegisterConnectionStatusCallback();
-			mXxService = null;
-		}
-
-	};
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -231,6 +217,22 @@ public class LoginActivity extends BaseFragmentActivity1 implements
 		L.i(LoginActivity.class, "[SERVICE] Unbind");
 		Intent mServiceIntent = new Intent(this, XXService.class);
 		mServiceIntent.setAction(LOGIN_ACTION);
+		mServiceConnection = new ServiceConnection() {
+
+			@Override
+			public void onServiceConnected(ComponentName name, IBinder service) {
+				mXxService = ((XXService.XXBinder) service).getService();
+				mXxService.registerConnectionStatusCallback(LoginActivity.this);
+				// 开始连接xmpp服务器
+			}
+
+			@Override
+			public void onServiceDisconnected(ComponentName name) {
+				mXxService.unRegisterConnectionStatusCallback();
+				mXxService = null;
+			}
+
+		};
 		bindService(mServiceIntent, mServiceConnection,
 				Context.BIND_AUTO_CREATE + Context.BIND_DEBUG_UNBIND);
 	}

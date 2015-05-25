@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.sxzq.oa.R;
@@ -23,6 +22,7 @@ import com.sxzq.oa.activity.LoginActivity;
 import com.sxzq.oa.activity.MainActivity;
 import com.sxzq.oa.servcie.XXService;
 import com.sxzq.oa.ui.view.CustomDialog;
+import com.sxzq.oa.ui.view.Switch;
 import com.sxzq.oa.util.DialogUtil;
 import com.sxzq.oa.util.PreferenceConstants;
 import com.sxzq.oa.util.PreferenceUtils;
@@ -30,7 +30,7 @@ import com.sxzq.oa.util.XMPPHelper;
 
 @SuppressLint("NewApi")
 public class MeFragment extends Fragment implements OnClickListener,OnCheckedChangeListener{
-	private TextView mTitleNameView;
+//	private TextView mTitleNameView;
 	private View mAccountSettingView;
 	private ImageView mHeadIcon;
 	private ImageView mStatusIcon;
@@ -72,8 +72,8 @@ public class MeFragment extends Fragment implements OnClickListener,OnCheckedCha
 		mExitConfirmBtn.setText(R.string.exit);
 		mExitCancleBtn.setOnClickListener(this);
 		mExitConfirmBtn.setOnClickListener(this);
-		mTitleNameView = (TextView) view.findViewById(R.id.ivTitleName);
-		mTitleNameView.setText(R.string.settings_fragment_title);
+//		mTitleNameView = (TextView) view.findViewById(R.id.ivTitleName);
+//		mTitleNameView.setText(R.string.settings_fragment_title);
 		mAccountSettingView = view.findViewById(R.id.accountSetting);
 		mAccountSettingView.setOnClickListener(this);
 		mHeadIcon = (ImageView) view.findViewById(R.id.face);
@@ -105,8 +105,8 @@ public class MeFragment extends Fragment implements OnClickListener,OnCheckedCha
 		mPoweronReceiverMsgSwitch = (Switch) view
 				.findViewById(R.id.poweron_receiver_msg_switch);
 		mPoweronReceiverMsgSwitch.setOnCheckedChangeListener(this);
-		mSendCrashSwitch = (Switch) view.findViewById(R.id.send_crash_switch);
-		mSendCrashSwitch.setOnCheckedChangeListener(this);
+//		mSendCrashSwitch = (Switch) view.findViewById(R.id.send_crash_switch);
+//		mSendCrashSwitch.setOnCheckedChangeListener(this);
 		mFeedBackView = view.findViewById(R.id.set_feedback);
 		mAboutView = view.findViewById(R.id.set_about);
 		mExitBtn = (Button) view.findViewById(R.id.exit_app);
@@ -153,8 +153,6 @@ public class MeFragment extends Fragment implements OnClickListener,OnCheckedCha
 				getActivity(), PreferenceConstants.AUTO_RECONNECT, true));
 		mPoweronReceiverMsgSwitch.setChecked(PreferenceUtils.getPrefBoolean(
 				getActivity(), PreferenceConstants.AUTO_START, true));
-		mSendCrashSwitch.setChecked(PreferenceUtils.getPrefBoolean(
-				getActivity(), PreferenceConstants.REPORT_CRASH, true));
 	}
 
 	@Override
@@ -196,11 +194,11 @@ public class MeFragment extends Fragment implements OnClickListener,OnCheckedCha
 			PreferenceUtils.setPrefBoolean(getActivity(),
 					PreferenceConstants.AUTO_START, isChecked);
 			break;
-		case R.id.send_crash_switch:
-			PreferenceUtils.setPrefBoolean(getActivity(),
-					PreferenceConstants.REPORT_CRASH, isChecked);
-
-			break;
+//		case R.id.send_crash_switch:
+//			PreferenceUtils.setPrefBoolean(getActivity(),
+//					PreferenceConstants.REPORT_CRASH, isChecked);
+//
+//			break;
 		default:
 			break;
 		}

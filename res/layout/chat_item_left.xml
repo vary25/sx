@@ -48,7 +48,7 @@
         android:clickable="true"
         android:minHeight="44.0dip" >
 
-        <com.way.ui.emoji.EmojiTextView
+        <com.way.ui.emoji.EmojiEditText
             android:id="@+id/textView2"
             style="@style/B5_Font"
             android:layout_width="wrap_content"

@@ -7,7 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
      <include
         layout="@layout/custom_commen_title"
-        android:focusable="true" />
+        android:focusable="true" android:visibility="gone"/>
 
     <include
         layout="@layout/net_status_bar_info_top"

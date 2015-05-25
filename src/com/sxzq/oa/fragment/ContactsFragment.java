@@ -39,9 +39,9 @@ import com.sxzq.oa.util.L;
 import com.sxzq.oa.util.PreferenceConstants;
 import com.sxzq.oa.util.PreferenceUtils;
 import com.sxzq.oa.util.T;
-import com.way.ui.quickaction.ActionItem;
-import com.way.ui.quickaction.QuickAction;
-import com.way.ui.quickaction.QuickAction.OnActionItemClickListener;
+import com.sxzq.oa.ui.quickaction.ActionItem;
+import com.sxzq.oa.ui.quickaction.QuickAction;
+import com.sxzq.oa.ui.quickaction.QuickAction.OnActionItemClickListener;
 
 public class ContactsFragment extends Fragment
 {
@@ -72,10 +72,15 @@ public class ContactsFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater , ViewGroup container , Bundle savedInstanceState)
 	{
-		View v = inflater.inflate(R.layout.contacts_fragment, null) ;
-		initViews();
-		registerListAdapter();
+		View v = (ViewGroup) inflater.inflate(R.layout.contacts_fragment,container, false) ;
 		return v;
+	}
+	
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		initViews(view);
+		registerListAdapter();
+		super.onViewCreated(view, savedInstanceState);
 	}
 	
 	private void registerListAdapter() {
@@ -85,8 +90,8 @@ public class ContactsFragment extends Fragment
 		mRosterAdapter.requery();
 	}
 	
-	private void initViews() {
-		mPullRefreshScrollView = (PullToRefreshScrollView) getActivity().findViewById(R.id.pull_refresh_scrollview);
+	private void initViews(View vg) {
+		mPullRefreshScrollView = (PullToRefreshScrollView) vg.findViewById(R.id.pull_refresh_scrollview);
 		// mPullRefreshScrollView.setMode(Mode.DISABLED);
 		// mPullRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
 		// "最近更新：刚刚");

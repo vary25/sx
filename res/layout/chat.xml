@@ -13,7 +13,7 @@
         android:layout_height="0.0dip"
         android:layout_weight="1.0" >
 
-        <com.sxzq.oq.ui.xlistview.MsgListView
+        <com.sxzq.oa.ui.xlistview.MsgListView
             android:id="@+id/msg_listView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -143,7 +143,7 @@
             android:flipInterval="30"
             android:persistentDrawingCache="animation" />
 
-        <com.way.ui.view.CirclePageIndicator
+        <com.sxzq.oa.ui.view.CirclePageIndicator
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/indicator"
             android:layout_width="fill_parent"

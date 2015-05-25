@@ -4,7 +4,7 @@
  * @author Maxwin
  * @description XListView's header
  */
-package com.sxzq.oq.ui.xlistview;
+package com.sxzq.oa.ui.xlistview;
 
 import android.content.Context;
 import android.util.AttributeSet;

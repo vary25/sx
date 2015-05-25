@@ -19,8 +19,14 @@ public class DiscoverFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater , ViewGroup container , Bundle savedInstanceState)
 	{
-		ViewGroup v = (ViewGroup) inflater.inflate(R.layout.discover_fragment, null) ;
-		ListView lv = (ListView) v.findViewById(R.id.lvApp);
+		ViewGroup v = (ViewGroup) inflater.inflate(R.layout.discover_fragment,container,false) ;
+		
+		return v ;
+	}
+	
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		ListView lv = (ListView) view.findViewById(R.id.lvApp);
 		List<AppModel> list = new ArrayList<AppModel>();
 		AppModel app1 = new AppModel();
 		app1.setAppName("签到");
@@ -29,7 +35,7 @@ public class DiscoverFragment extends Fragment
 		AppAdapter adapter = new AppAdapter(getActivity(), list);
 		
 		lv.setAdapter(adapter);
-		return v ;
+		super.onViewCreated(view, savedInstanceState);
 	}
 	
 	

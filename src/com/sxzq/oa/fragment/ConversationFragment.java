@@ -23,7 +23,7 @@ public class ConversationFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater , ViewGroup container , Bundle savedInstanceState)
 	{
-		View v = inflater.inflate(R.layout.conversation_fragment, null) ;
+		View v = inflater.inflate(R.layout.conversation_fragment, container,false) ;
 		return v ;
 	}
 }

@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+     >
 
-    <include layout="@layout/custom_commen_title" />
-
-    <com.way.ui.scrollview.BounceScrollView
+    <com.sxzq.oa.ui.view.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/coversation_bg"
@@ -108,7 +107,7 @@
                     android:gravity="center_vertical"
                     android:text="显示离线好友" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/show_offline_roster_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -134,7 +133,7 @@
                     android:gravity="center_vertical"
                     android:text="通知栏挂机图标" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/notify_run_background_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -161,7 +160,7 @@
                     android:gravity="center_vertical"
                     android:text="静音模式" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/new_msg_sound_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -187,7 +186,7 @@
                     android:gravity="center_vertical"
                     android:text="消息振动提示" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/new_msg_vibrator_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -213,7 +212,7 @@
                     android:gravity="center_vertical"
                     android:text="消息指示灯提示" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/new_msg_led_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -240,7 +239,7 @@
                     android:gravity="center_vertical"
                     android:text="新消息预览" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/visiable_new_msg_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -273,7 +272,7 @@
                         android:gravity="center_vertical"
                         android:text="聊天显示自己头像" />
 
-                    <com.way.ui.switcher.Switch
+                    <com.sxzq.oa.ui.view.Switch
                         android:id="@+id/show_head_switch"
                         android:layout_width="80dip"
                         android:layout_height="28dip"
@@ -301,7 +300,7 @@
                     android:gravity="center_vertical"
                     android:text="断线自动重连" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/connection_auto_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -327,7 +326,7 @@
                     android:gravity="center_vertical"
                     android:text="开机自动接收消息" />
 
-                <com.way.ui.switcher.Switch
+                <com.sxzq.oa.ui.view.Switch
                     android:id="@+id/poweron_receiver_msg_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -353,7 +352,6 @@
                     android:gravity="center_vertical"
                     android:text="发送崩溃报告" />
 
-                <com.way.ui.switcher.Switch
                     android:id="@+id/send_crash_switch"
                     android:layout_width="80dip"
                     android:layout_height="28dip"
@@ -437,6 +435,6 @@
                 android:background="@drawable/common_btn_red"
                 android:text="@string/logout_exit_account" />
         </LinearLayout>
-    </com.way.ui.scrollview.BounceScrollView>
+    </com.sxzq.oa.ui.view.BounceScrollView>
 
 </LinearLayout>

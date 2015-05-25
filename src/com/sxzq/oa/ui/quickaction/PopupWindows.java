@@ -1,4 +1,4 @@
-package com.way.ui.quickaction;
+package com.sxzq.oa.ui.quickaction;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
