@@ -1,6 +1,9 @@
 package com.sxzq.oa.fragment;
 
 import com.sxzq.oa.R;
+import com.sxzq.oa.Session;
+import com.sxzq.oa.activity.MainActivity;
+import com.sxzq.oa.servcie.XXService;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -44,7 +47,15 @@ public class PlusActionProvider extends ActionProvider
 			
 			@Override
 			public boolean onMenuItemClick(MenuItem arg0) {
-				Toast.makeText(context, R.string.action_menu_addfriend, 5000).show();
+				// 添加联系人
+				XXService xxService = Session.getInstance().getService();
+				if (xxService == null || !xxService.isAuthenticated()) {
+					
+				}else{
+					new com.sxzq.oa.ui.view.AddRosterItemDialog(context,xxService).show();
+				}
+				
+//				Toast.makeText(context, R.string.action_menu_addfriend, 5000).show();
 				return true;
 			}
 		});

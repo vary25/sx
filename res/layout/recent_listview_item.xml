@@ -15,7 +15,6 @@
         android:paddingTop="6.0dip"
         android:tag="back" >
 
-        android:background="#fff0f3f6"
         <Button
             android:id="@+id/recent_del_btn"
             android:layout_width="64.0dip"

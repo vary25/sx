@@ -32,6 +32,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.sxzq.oa.R;
+import com.sxzq.oa.Session;
 import com.sxzq.oa.XXBroadcastReceiver;
 import com.sxzq.oa.XXBroadcastReceiver.EventHandler;
 import com.sxzq.oa.db.RosterProvider;
@@ -51,7 +52,7 @@ import com.sxzq.oa.util.XMPPHelper;
 
 
 public class MainActivity extends BaseFragmentActivity1 implements OnCheckedChangeListener, EventHandler,IConnectionStatusCallback{
-	private static final String[] GROUPS_QUERY = new String[] {
+	public static final String[] GROUPS_QUERY = new String[] {
 		RosterConstants._ID, RosterConstants.GROUP, };
 	private XXService mXxService;
 	//ViewPager�ؼ�
@@ -106,6 +107,7 @@ public class MainActivity extends BaseFragmentActivity1 implements OnCheckedChan
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			mXxService = ((XXService.XXBinder) service).getService();
+			Session.getInstance().setService(mXxService);
 			mXxService.registerConnectionStatusCallback(MainActivity.this);
 			// 开始连接xmpp服务器
 			if (!mXxService.isAuthenticated()) {
@@ -130,6 +132,7 @@ public class MainActivity extends BaseFragmentActivity1 implements OnCheckedChan
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
 			mXxService.unRegisterConnectionStatusCallback();
+			Session.getInstance().setService(null);
 			mXxService = null;
 		}
 
