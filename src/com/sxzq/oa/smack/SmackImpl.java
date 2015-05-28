@@ -1,7 +1,10 @@
 package com.sxzq.oa.smack;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -27,6 +30,7 @@ import com.sxzq.oa.util.L;
 import com.sxzq.oa.util.PreferenceConstants;
 import com.sxzq.oa.util.PreferenceUtils;
 
+import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.PacketListener;
@@ -46,10 +50,15 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smack.provider.ProviderManager;
 import org.jivesoftware.smack.util.StringUtils;
+import org.jivesoftware.smackx.Form;
+import org.jivesoftware.smackx.FormField;
 import org.jivesoftware.smackx.ServiceDiscoveryManager;
 import org.jivesoftware.smackx.carbons.Carbon;
 import org.jivesoftware.smackx.carbons.CarbonManager;
 import org.jivesoftware.smackx.forward.Forwarded;
+import org.jivesoftware.smackx.muc.DiscussionHistory;
+import org.jivesoftware.smackx.muc.InvitationListener;
+import org.jivesoftware.smackx.muc.MultiUserChat;
 import org.jivesoftware.smackx.packet.DelayInfo;
 import org.jivesoftware.smackx.packet.DelayInformation;
 import org.jivesoftware.smackx.ping.PingManager;
@@ -121,7 +130,8 @@ public class SmackImpl implements Smack {
 	private PacketListener mPacketListener;// 消息动态监听
 	private PacketListener mSendFailureListener;// 消息发送失败动态监听
 	private PacketListener mPongListener;// ping pong服务器动态监听
-
+	private InvitationListener invitationListener; //邀请监听
+	
 	// ping-pong服务器
 	private String mPingID;// ping服务器的id
 	private long mPingTimestamp;// 时间戳
@@ -209,6 +219,7 @@ public class SmackImpl implements Smack {
 						PreferenceConstants.RESSOURCE, XMPP_IDENTITY_NAME);
 				mXMPPConnection.login(account, password, ressource);
 			}
+			
 			setStatusFromConfig();// 更新在线状态
 
 		} catch (XMPPException e) {
@@ -603,6 +614,23 @@ public class SmackImpl implements Smack {
 			}
 		};
 		mRoster.addRosterListener(mRosterListener);
+	}
+	
+	public void registerInvateListener(){
+		MultiUserChat.addInvitationListener(getConnection(),
+				new InvitationListener() {
+					// 对应参数：连接、 房间JID、房间名、附带内容、密码、消息
+					@Override
+					public void invitationReceived(Connection conn,
+							String room, String inviter, String reason,
+							String password, Message message) {
+
+						L.i( "收到来自 " + inviter + " 的聊天室邀请。邀请附带内容："
+								+ reason);
+
+						joinMultiUserChat(conn.getUser(), room, password);
+					}
+				});
 	}
 
 	private String getJabberID(String from) {
@@ -1008,5 +1036,115 @@ public class SmackImpl implements Smack {
 		ContentValues values = new ContentValues();
 		values.put(RosterConstants.STATUS_MODE, StatusMode.offline.ordinal());
 		mContentResolver.update(RosterProvider.CONTENT_URI, values, null, null);
+	}
+	
+	/**
+	 * 创建房间
+	 * 
+	 * @param roomName  房间名称
+	 */
+	public MultiUserChat createRoom(String user, String roomName,String password) {
+		if (mService == null)
+			return null;
+
+		MultiUserChat muc = null;
+		try {
+			// 创建一个MultiUserChat
+			muc = new MultiUserChat(mXMPPConnection, roomName + "@conference."
+					+ mXMPPConnection.getServiceName());
+			// 创建聊天室
+			muc.create(roomName);
+			// 获得聊天室的配置表单
+			Form form = muc.getConfigurationForm();
+			// 根据原始表单创建一个要提交的新表单。
+			Form submitForm = form.createAnswerForm();
+			// 向要提交的表单添加默认答复
+			for (Iterator<FormField> fields = form.getFields(); fields
+					.hasNext();) {
+				FormField field = (FormField) fields.next();
+				if (!FormField.TYPE_HIDDEN.equals(field.getType())
+						&& field.getVariable() != null) {
+					// 设置默认值作为答复
+					submitForm.setDefaultAnswer(field.getVariable());
+				}
+			}
+			// 设置聊天室的新拥有者
+			List<String> owners = new ArrayList<String>();
+			owners.add(mXMPPConnection.getUser());// 用户JID
+			submitForm.setAnswer("muc#roomconfig_roomowners", owners);
+			// 设置聊天室是持久聊天室，即将要被保存下来
+			submitForm.setAnswer("muc#roomconfig_persistentroom", true);
+			// 房间仅对成员开放
+			submitForm.setAnswer("muc#roomconfig_membersonly", false);
+			// 允许占有者邀请其他人
+			submitForm.setAnswer("muc#roomconfig_allowinvites", true);
+			if (!password.equals("")) {
+				// 进入是否需要密码
+				submitForm.setAnswer("muc#roomconfig_passwordprotectedroom",
+						true);
+				// 设置进入密码
+				submitForm.setAnswer("muc#roomconfig_roomsecret", password);
+			}
+			// 能够发现占有者真实 JID 的角色
+			// submitForm.setAnswer("muc#roomconfig_whois", "anyone");
+			// 登录房间对话
+			submitForm.setAnswer("muc#roomconfig_enablelogging", true);
+			// 仅允许注册的昵称登录
+			submitForm.setAnswer("x-muc#roomconfig_reservednick", true);
+			// 允许使用者修改昵称
+			submitForm.setAnswer("x-muc#roomconfig_canchangenick", false);
+			// 允许用户注册房间
+			submitForm.setAnswer("x-muc#roomconfig_registration", false);
+			// 发送已完成的表单（有默认值）到服务器来配置聊天室
+			muc.sendConfigurationForm(submitForm);
+		} catch (XMPPException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return muc;
+	}
+	
+	/**
+	 * 加入会议室
+	 * 
+	 * @param user
+	 *            昵称
+	 * @param password
+	 *            会议室密码
+	 * @param roomsName
+	 *            会议室名
+	 */
+	public MultiUserChat joinMultiUserChat(String user, String roomsName,
+			String password) {
+		if (getConnection() == null)
+			return null;
+		try {
+			// 使用XMPPConnection创建一个MultiUserChat窗口
+			MultiUserChat muc = new MultiUserChat(getConnection(), roomsName
+					+ "@conference." + getConnection().getServiceName());
+			// 聊天室服务将会决定要接受的历史记录数量
+			DiscussionHistory history = new DiscussionHistory();
+			history.setMaxChars(0);
+			// history.setSince(new Date());
+			// 用户加入聊天室
+			muc.join(user, password, history,
+					SmackConfiguration.getPacketReplyTimeout());
+			Log.i("MultiUserChat", "会议室【"+roomsName+"】加入成功........");
+			return muc;
+		} catch (XMPPException e) {
+			e.printStackTrace();
+			Log.i("MultiUserChat", "会议室【"+roomsName+"】加入失败........");
+			return null;
+		}
+	}
+
+	public void inviteUserToRoom(MultiUserChat muc,String userjid,String msg){
+		muc.invite(userjid, msg); 
+	}
+	
+	
+	
+	private Connection getConnection() {
+		return mXMPPConnection;
 	}
 }
